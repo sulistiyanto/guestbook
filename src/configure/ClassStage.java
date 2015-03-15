@@ -36,7 +36,7 @@ public class ClassStage {
     public final String URL_PRESENCE_TITLE = "Kehadiran";
     public final String URL_SETTING_TITLE = "Pengaturan";
 
-    public final String URL_IMAGE = "/image/icon.ico";
+    public final String URL_IMAGE = "/image/ic_launcher.png";
     
     public void stageChild(ActionEvent event, String view, String title, String icon, Stage primaryStage) {
         try {

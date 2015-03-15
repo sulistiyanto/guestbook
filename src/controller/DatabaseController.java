@@ -66,11 +66,10 @@ public class DatabaseController implements Initializable {
                 String database = "guestbookserver";
                 String user = "root";
                 String password = "scorpion";
-                String[] kata = new String[]{"C:\\xampp\\mysql\\bin\\mysql", database, "-u" + user, "-p" + password, "-e", " source " + txtImport.getText()};
-                System.out.println(Arrays.toString(kata));
-                Process runtimeProcess = Runtime.getRuntime().exec(Arrays.toString(kata));
-                int prosesSukses = runtimeProcess.waitFor();
-                if (prosesSukses == 0) {
+                String[] kata = new String[]{"c:\\xampp\\mysql\\bin\\mysql", database, "-u" + user, "-p" + password, "-e", " source " + txtImport.getText()};
+                Process runtimeProcess = Runtime.getRuntime().exec(kata);
+                int process = runtimeProcess.waitFor();
+                if (process == 0) {
                     configScene.createDialog(Alert.AlertType.INFORMATION, "Database berhasil di restore/ import ...");
                     txtExport.setText("");
                 } else {
