@@ -1,0 +1,281 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import de.jensd.fx.glyphs.fontawesome.*?>
+<?import javafx.scene.canvas.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="520.0" prefWidth="800.0" styleClass="background" stylesheets="@../css/loginStyle.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.GuestBookController">
+   <children>
+      <VBox layoutX="106.0" layoutY="35.0" prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <BorderPane prefHeight="30.0" prefWidth="200.0">
+               <right>
+                  <HBox prefHeight="41.0" prefWidth="137.0" BorderPane.alignment="CENTER">
+                     <children>
+                        <Label fx:id="labelAbout" styleClass="label-about" stylesheets="@../image/buttonCSS.css" text="Pengaturan">
+                           <HBox.margin>
+                              <Insets left="10.0" top="20.0" />
+                           </HBox.margin>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </Label>
+                        <Label fx:id="lblAccount" styleClass="label-about" stylesheets="@../image/buttonCSS.css" text="Akun" visible="false">
+                           <HBox.margin>
+                              <Insets left="10.0" top="20.0" />
+                           </HBox.margin>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </Label>
+                     </children>
+                     <BorderPane.margin>
+                        <Insets />
+                     </BorderPane.margin>
+                  </HBox>
+               </right>
+               <left>
+                  <ImageView fitHeight="47.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
+                     <image>
+                        <Image url="@../image/tiyanrcodes.png" />
+                     </image>
+                     <BorderPane.margin>
+                        <Insets bottom="5.0" left="5.0" top="5.0" />
+                     </BorderPane.margin>
+                  </ImageView>
+               </left>
+            </BorderPane>
+            <HBox prefHeight="50.0" prefWidth="200.0" styleClass="background-header">
+               <VBox.margin>
+                  <Insets left="5.0" right="5.0" />
+               </VBox.margin>
+               <children>
+                  <Label>
+                     <graphic>
+                        <FontAwesomeIcon fill="WHITE" glyphName="USER" size="28px" />
+                     </graphic>
+                     <HBox.margin>
+                        <Insets left="10.0" right="10.0" top="10.0" />
+                     </HBox.margin>
+                  </Label>
+                  <TextField fx:id="txtUsername" onAction="#actionUsername" promptText="username">
+                     <HBox.margin>
+                        <Insets top="10.0" />
+                     </HBox.margin>
+                  </TextField>
+                  <Label>
+                     <HBox.margin>
+                        <Insets left="25.0" right="10.0" top="10.0" />
+                     </HBox.margin>
+                     <graphic>
+                        <FontAwesomeIcon fill="WHITE" glyphName="KEY" size="25px" />
+                     </graphic>
+                  </Label>
+                  <PasswordField fx:id="txtPassword" onAction="#actionPassword" promptText="password">
+                     <HBox.margin>
+                        <Insets top="10.0" />
+                     </HBox.margin>
+                  </PasswordField>
+                  <AnchorPane prefHeight="34.0" prefWidth="141.0">
+                     <children>
+                        <Button fx:id="buttonSignOut" mnemonicParsing="false" onAction="#actionLogout" prefHeight="25.0" prefWidth="100.0" styleClass="track-background" stylesheets="@../css/style.css" text="Keluar" visible="false" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="10.0">
+                           <graphic>
+                              <FontAwesomeIcon fill="WHITE" glyphName="SIGN_OUT" size="17px" />
+                           </graphic>
+                        </Button>
+                        <Button fx:id="buttonSignIn" mnemonicParsing="false" onAction="#actionLogin" onKeyPressed="#keySignIn" prefHeight="25.0" prefWidth="100.0" styleClass="track-background" stylesheets="@../css/style.css" text="Masuk" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="10.0">
+                           <graphic>
+                              <FontAwesomeIcon fill="WHITE" glyphName="SIGN_IN" size="17px" />
+                           </graphic>
+                        </Button>
+                     </children>
+                  </AnchorPane>
+               </children>
+            </HBox>
+            <AnchorPane prefHeight="343.0" prefWidth="700.0" VBox.vgrow="ALWAYS">
+               <children>
+                  <Pane layoutX="139.0" layoutY="114.0" prefHeight="200.0" prefWidth="200.0" styleClass="pane" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="0.0" />
+                  <AnchorPane prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="0.0">
+                     <children>
+                        <BorderPane prefHeight="349.0" prefWidth="790.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                           <center>
+                              <GridPane BorderPane.alignment="CENTER">
+                                <columnConstraints>
+                                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                </columnConstraints>
+                                <rowConstraints>
+                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                </rowConstraints>
+                                 <children>
+                                    <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2">
+                                       <center>
+                                          <Button fx:id="btnPresence" contentDisplay="TOP" mnemonicParsing="false" onAction="#actionPresence" prefHeight="200.0" prefWidth="200.0" styleClass="buttonMenu" stylesheets="@../css/style.css" text="Kehadiran" textAlignment="CENTER" textOverrun="LEADING_WORD_ELLIPSIS" visible="false" wrapText="true" BorderPane.alignment="CENTER">
+                                             <cursor>
+                                                <Cursor fx:constant="HAND" />
+                                             </cursor>
+                                             <effect>
+                                                <Lighting diffuseConstant="1.49" specularConstant="0.0" specularExponent="3.26" surfaceScale="10.0">
+                                                   <bumpInput>
+                                                      <DropShadow />
+                                                   </bumpInput>
+                                                   <light>
+                                                      <Light.Distant azimuth="266.86" />
+                                                   </light>
+                                                </Lighting>
+                                             </effect>
+                                             <font>
+                                                <Font name="System Bold" size="18.0" />
+                                             </font>
+                                             <graphic>
+                                                <FontAwesomeIcon fill="WHITE" glyphName="FILE_TEXT" size="100px" textAlignment="CENTER" wrappingWidth="88.0" />
+                                             </graphic>
+                                          </Button>
+                                       </center>
+                                    </BorderPane>
+                                    <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1">
+                                       <center>
+                                          <Button fx:id="btnGuest" contentDisplay="TOP" mnemonicParsing="false" onAction="#actionGuest" prefHeight="200.0" prefWidth="200.0" styleClass="buttonMenu" stylesheets="@../css/style.css" text="Tamu " textAlignment="CENTER" textOverrun="LEADING_WORD_ELLIPSIS" visible="false" wrapText="true" BorderPane.alignment="CENTER">
+                                             <graphic>
+                                                <FontAwesomeIcon fill="WHITE" glyphName="GROUP" size="100px" textAlignment="CENTER" wrappingWidth="109.0" />
+                                             </graphic>
+                                             <font>
+                                                <Font name="System Bold" size="18.0" />
+                                             </font>
+                                             <cursor>
+                                                <Cursor fx:constant="HAND" />
+                                             </cursor>
+                                             <effect>
+                                                <Lighting diffuseConstant="1.49" specularConstant="0.0" specularExponent="3.26" surfaceScale="10.0">
+                                                   <bumpInput>
+                                                      <DropShadow />
+                                                   </bumpInput>
+                                                   <light>
+                                                      <Light.Distant azimuth="266.86" />
+                                                   </light>
+                                                </Lighting>
+                                             </effect>
+                                          </Button>
+                                       </center>
+                                    </BorderPane>
+                                    <BorderPane prefHeight="200.0" prefWidth="200.0" />
+                                    <Button fx:id="btnBook" contentDisplay="TOP" mnemonicParsing="false" onAction="#actionBook" prefHeight="200.0" prefWidth="200.0" styleClass="buttonMenu" stylesheets="@../css/style.css" text="Buku Tamu" textAlignment="CENTER" textOverrun="LEADING_WORD_ELLIPSIS" visible="false" wrapText="true">
+                                       <cursor>
+                                          <Cursor fx:constant="HAND" />
+                                       </cursor>
+                                       <effect>
+                                          <Lighting diffuseConstant="1.49" specularConstant="0.0" specularExponent="3.26" surfaceScale="10.0">
+                                             <bumpInput>
+                                                <DropShadow />
+                                             </bumpInput>
+                                             <light>
+                                                <Light.Distant azimuth="266.86" />
+                                             </light>
+                                          </Lighting>
+                                       </effect>
+                                       <font>
+                                          <Font name="System Bold" size="18.0" />
+                                       </font>
+                                       <graphic>
+                                          <FontAwesomeIcon fill="WHITE" glyphName="BOOK" size="100px" wrappingWidth="97.0" />
+                                       </graphic>
+                                    </Button>
+                                 </children>
+                              </GridPane>
+                           </center>
+                           <left>
+                              <Pane prefHeight="194.0" prefWidth="109.0" BorderPane.alignment="CENTER" />
+                           </left>
+                           <right>
+                              <Pane prefHeight="225.0" prefWidth="39.0" BorderPane.alignment="CENTER" />
+                           </right>
+                           <top>
+                              <AnchorPane prefHeight="155.0" prefWidth="790.0" BorderPane.alignment="CENTER">
+                                 <children>
+                                    <BorderPane layoutX="-13.0" layoutY="-59.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                       <center>
+                                          <Text fill="#3184ba" strokeType="OUTSIDE" strokeWidth="0.0" text="Guest Book Server" BorderPane.alignment="CENTER">
+                                             <font>
+                                                <Font name="Lucida Sans Demibold" size="48.0" />
+                                             </font>
+                                             <effect>
+                                                <Lighting diffuseConstant="1.79" specularConstant="0.9" specularExponent="40.0" surfaceScale="2.65">
+                                                   <bumpInput>
+                                                      <Shadow />
+                                                   </bumpInput>
+                                                   <light>
+                                                      <Light.Distant azimuth="212.44" color="#c6c6c6" />
+                                                   </light>
+                                                </Lighting>
+                                             </effect>
+                                          </Text>
+                                       </center>
+                                    </BorderPane>
+                                 </children>
+                              </AnchorPane>
+                           </top>
+                        </BorderPane>
+                     </children>
+                  </AnchorPane>
+               </children></AnchorPane>
+            <HBox prefHeight="50.0" prefWidth="200.0" styleClass="background-footer">
+               <VBox.margin>
+                  <Insets left="5.0" right="5.0" />
+               </VBox.margin>
+               <children>
+                  <Label text="IP Server :" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="24.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets left="10.0" top="5.0" />
+                     </HBox.margin>
+                  </Label>
+                  <Label fx:id="lblIPAddress" prefHeight="35.0" prefWidth="194.0" text="Not Found" textFill="#0f75bc">
+                     <HBox.margin>
+                        <Insets left="5.0" top="5.0" />
+                     </HBox.margin>
+                     <font>
+                        <Font name="System Bold" size="24.0" />
+                     </font>
+                  </Label>
+                  <Label text="Admin :" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="24.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets left="30.0" top="5.0" />
+                     </HBox.margin>
+                  </Label>
+                  <Label fx:id="lblAdmin" text="Not Found" textFill="#0f75bc">
+                     <font>
+                        <Font name="System Bold" size="24.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets left="5.0" top="5.0" />
+                     </HBox.margin>
+                  </Label>
+               </children>
+            </HBox>
+            <BorderPane prefHeight="30.0" prefWidth="200.0">
+               <center>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="© tiyanrcode 2015" BorderPane.alignment="CENTER">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Text>
+               </center>
+            </BorderPane>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>

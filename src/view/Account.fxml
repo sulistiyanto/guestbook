@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import de.jensd.fx.glyphs.fontawesome.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="358.0" prefWidth="709.0" styleClass="paneList" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.AccountController">
+   <children>
+      <Text layoutX="14.0" layoutY="36.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Daftar Akun">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Text>
+      <Separator layoutX="14.0" layoutY="42.0" prefHeight="2.0" prefWidth="453.0" />
+      <TextField fx:id="txtSearch" layoutX="14.0" layoutY="57.0" onKeyReleased="#keySearch" prefHeight="25.0" prefWidth="453.0" promptText="Pencarian username" styleClass="custom-text-field" />
+      <TableView fx:id="tableAccount" layoutX="14.0" layoutY="93.0" onMouseClicked="#clickedTableAccount" prefHeight="249.0" prefWidth="453.0">
+        <columns>
+          <TableColumn fx:id="colUsername" prefWidth="110.0">
+               <graphic>
+                  <Label text="Username">
+                     <graphic>
+                        <FontAwesomeIcon fill="WHITE" glyphName="USER" size="17px" />
+                     </graphic>
+                  </Label>
+               </graphic>
+            </TableColumn>
+          <TableColumn fx:id="colPassword" prefWidth="143.0">
+               <graphic>
+                  <Label text="Password">
+                     <graphic>
+                        <FontAwesomeIcon fill="WHITE" glyphName="KEY" size="17px" />
+                     </graphic>
+                  </Label>
+               </graphic>
+            </TableColumn>
+            <TableColumn fx:id="colLevel" prefWidth="79.0">
+               <graphic>
+                  <Label text="Level">
+                     <graphic>
+                        <FontAwesomeIcon fill="WHITE" glyphName="LEVEL_UP" size="17px" />
+                     </graphic>
+                  </Label>
+               </graphic>
+            </TableColumn>
+            <TableColumn fx:id="colAction" prefWidth="119.0">
+               <graphic>
+                  <Label text="Aksi">
+                     <graphic>
+                        <FontAwesomeIcon fill="WHITE" glyphName="COG" size="17px" />
+                     </graphic>
+                  </Label>
+               </graphic>
+            </TableColumn>
+        </columns>
+      </TableView>
+      <Label layoutX="443.0" layoutY="60.0" prefHeight="17.0" prefWidth="19.0">
+         <graphic>
+            <FontAwesomeIcon glyphName="SEARCH" size="15px" />
+         </graphic>
+      </Label>
+      <AnchorPane layoutX="400.0" prefHeight="380.0" prefWidth="228.0" styleClass="paneInput" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <Text layoutX="14.0" layoutY="36.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Masukan Akun">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Text>
+            <Separator layoutX="14.0" layoutY="41.0" prefWidth="200.0" />
+            <VBox layoutX="14.0" layoutY="57.0" prefHeight="200.0" prefWidth="200.0" spacing="5.0">
+               <children>
+                  <Label text="Username" />
+                  <TextField fx:id="txtUsername" promptText="Username" />
+                  <Label text="Password" />
+                  <PasswordField fx:id="txtPassword" promptText="Password" />
+                  <Label text="Konfirmasi Password" />
+                  <PasswordField fx:id="txtKonfirmPass" promptText="Konfirmasi password" />
+                  <Label text="Level" />
+                  <ComboBox fx:id="comboLevel" prefHeight="25.0" prefWidth="201.0" promptText="Pilih Level Akun" />
+               </children>
+            </VBox>
+            <Button layoutX="119.0" layoutY="274.0" mnemonicParsing="false" onAction="#actionSave" prefHeight="25.0" prefWidth="95.0" text="Simpan" />
+            <Button layoutX="14.0" layoutY="274.0" mnemonicParsing="false" onAction="#actionRefresh" prefHeight="25.0" prefWidth="95.0" text="Segarkan" />
+            <HBox fx:id="boxLoading" layoutX="14.0" layoutY="328.0" opacity="0.0" prefHeight="15.0" prefWidth="200.0">
+               <children>
+                  <Label fx:id="labelLoadingStatus" layoutX="97.0" layoutY="6.0" prefHeight="15.0" prefWidth="104.0" text="Simpan Data . . .">
+                     <font>
+                        <Font name="Segoe UI Italic" size="12.0" />
+                     </font>
+                  </Label>
+                  <ProgressBar fx:id="progressBarLoading" prefHeight="14.0" prefWidth="125.0" progress="1.0" stylesheets="@../css/progressInfo.css" />
+               </children>
+            </HBox>
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>

@@ -1,0 +1,130 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Mar 8, 2015, 2:22:52 PM
+    Author     : sulistiyanto
+*/
+
+.label{
+}
+.label-about:hover{
+    -fx-underline: true;
+    -fx-text-fill: #0F75BC;
+}
+
+.decoration-button-family{
+    -fx-background-radius: 0;
+    -fx-border-style: null;
+    -fx-background-color: null;
+    -fx-background-image:url("./family.png");
+    -fx-background-repeat:no-repeat;
+}
+
+.decoration-button-family:hover{
+    -fx-background-radius: 0;
+    -fx-border-style: null;
+    -fx-background-color: null;
+    -fx-background-image:url("./family-hover.png");
+    -fx-background-repeat:no-repeat;
+}
+
+.decoration-button-presence{
+    -fx-background-radius: 0;
+    -fx-border-style: null;
+    -fx-background-color: null;
+    -fx-background-image:url("./presence.png");
+    -fx-background-repeat:no-repeat;
+}
+
+.decoration-button-presence:hover{
+    -fx-background-radius: 0;
+    -fx-border-style: null;
+    -fx-background-color: null;
+    -fx-background-image:url("./presence-hover.png");
+    -fx-background-repeat:no-repeat;
+}
+
+.decoration-button-book:hover{
+    -fx-background-radius: 0;
+    -fx-border-style: null;
+    -fx-background-color: null;
+    -fx-background-image:url("./book-hover.png");
+    -fx-background-repeat:no-repeat;
+}
+.decoration-button-book{
+    -fx-background-radius: 0;
+    -fx-border-style: null;
+    -fx-background-color: null;
+    -fx-background-image:url("./book.png");
+    -fx-background-repeat:no-repeat;
+}
+.decoration-button-guest{
+    -fx-background-radius: 0;
+    -fx-border-style: null;
+    -fx-background-color: null;
+    -fx-background-image:url("./guest.png");
+    -fx-background-repeat:no-repeat;
+}
+
+.decoration-button-guest:hover{
+    -fx-background-radius: 0;
+    -fx-border-style: null;
+    -fx-background-color: null;
+    -fx-background-image:url("./guest-hover.png");
+    -fx-background-repeat:no-repeat;
+}
+
+.decoration-button-guestFirst{
+    -fx-background-radius: 0;
+    -fx-border-style: null;
+    -fx-background-color: null;
+    -fx-background-image:url("./guestFirst.png");
+    -fx-background-repeat:no-repeat;
+}
+
+.decoration-button-guestFirst:hover{
+    -fx-background-radius: 0;
+    -fx-border-style: null;
+    -fx-background-color: null;
+    -fx-background-image:url("./guestFirst-hover.png");
+    -fx-background-repeat:no-repeat;
+}
+
+.decoration-button-guestFamily{
+    -fx-background-radius: 0;
+    -fx-border-style: null;
+    -fx-background-color: null;
+    -fx-background-image:url("./guestFamily.png");
+    -fx-background-repeat:no-repeat;
+}
+
+.decoration-button-guestFamily:hover{
+    -fx-background-radius: 0;
+    -fx-border-style: null;
+    -fx-background-color: null;
+    -fx-background-image:url("./guestFamily-hover.png");
+    -fx-background-repeat:no-repeat;
+}
+
+.decoration-button-print{
+    -fx-background-radius: 0;
+    -fx-border-style: null;
+    -fx-background-color: null;
+    -fx-background-image:url("./printer.png");
+    -fx-background-repeat:no-repeat;
+    -fx-background-position: center ;
+    -fx-border-width: 0;
+}
+
+.decoration-button-print:hover{
+    -fx-background-radius: 0;
+    -fx-border-style: null;
+    -fx-background-color: null;
+    -fx-background-image:url("./printer-hover.png");
+    -fx-background-position: center ;
+    -fx-background-repeat:no-repeat;
+    -fx-border-width: 0;
+}
