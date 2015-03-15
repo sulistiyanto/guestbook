@@ -7,6 +7,8 @@ package controller;
 
 import configure.configIPWifi;
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URL;
@@ -32,7 +34,7 @@ public class SharingController implements Initializable {
     private Label lblOn, ON;
     @FXML
     private Label lblOff, OFF;
-    
+
     configIPWifi ipWifi = new configIPWifi();
 
     /**
@@ -57,34 +59,24 @@ public class SharingController implements Initializable {
     }
 
     @FXML
-    private void actionOff(ActionEvent event) {
-         try {
-                Runtime rt = Runtime.getRuntime();
-                //Process pr = rt.exec("cmd /c dir");
-                Process pr = rt.exec("C:\\xampp\\htdocs\\guestbook\\start.exe");
- 
-                BufferedReader input = new BufferedReader(new InputStreamReader(pr.getInputStream()));
- 
-                String line=null;
- 
-                while((line=input.readLine()) != null) {
-                    System.out.println(line);
-                }
- 
-                int exitVal = pr.waitFor();
-                System.out.println("Exited with error code "+exitVal);
- 
-            } catch(IOException | InterruptedException e) {
-                System.out.println(e.toString());
-            }
-        lblOn.setVisible(true);
-        ON.setVisible(true);
-        btnOn.setVisible(true);
-        lblOff.setVisible(false);
-        OFF.setVisible(false);
-        btnOff.setVisible(false);
+    private void actionOff(ActionEvent event) throws IOException {
+
+        String fileName = "C:\\xampp\\htdocs\\guestbook\\start.lnk";
+        try {
+            Runtime runtime = Runtime.getRuntime();
+            Process p = Runtime.getRuntime().exec("cmd /c start " + fileName);
+            p.waitFor();
+            lblOn.setVisible(true);
+            ON.setVisible(true);
+            btnOn.setVisible(true);
+            lblOff.setVisible(false);
+            OFF.setVisible(false);
+            btnOff.setVisible(false);
+        } catch (InterruptedException e1) {
+            // TODO Auto-generated catch block
+            e1.printStackTrace();
+        }
         //ipWifi.IP();
-        //ipWifi.wifi();
     }
 
 }
