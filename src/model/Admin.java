@@ -12,12 +12,14 @@ package model;
 public class Admin {
     
     String username;
+    Boolean wifi;
 
     public Admin() {
     }
 
-    public Admin(String username) {
+    public Admin(String username, Boolean wifi) {
         this.username = username;
+        this.wifi = wifi;
     }
 
     public String getUsername() {
@@ -26,6 +28,14 @@ public class Admin {
 
     public void setUsername(String username) {
         this.username = username;
+    }
+
+    public Boolean getWifi() {
+        return wifi;
+    }
+
+    public void setWifi(Boolean wifi) {
+        this.wifi = wifi;
     }
     
 }

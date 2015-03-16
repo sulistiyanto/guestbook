@@ -13,6 +13,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import model.Admin;
 
 /**
  * FXML Controller class
@@ -29,6 +30,8 @@ public class SharingController implements Initializable {
     private Label lblOn, ON;
     @FXML
     private Label lblOff, OFF;
+    
+    Admin admin = new Admin();
 
     /**
      * Initializes the controller class.
@@ -39,6 +42,22 @@ public class SharingController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+        System.out.println(admin.getWifi());
+        /*if (admin.getWifi() == true) {
+            lblOn.setVisible(true);
+            ON.setVisible(true);
+            btnOn.setVisible(true);
+            lblOff.setVisible(false);
+            OFF.setVisible(false);
+            btnOff.setVisible(false);
+        } else {
+            lblOff.setVisible(true);
+            OFF.setVisible(true);
+            btnOff.setVisible(true);
+            lblOn.setVisible(false);
+            ON.setVisible(false);
+            btnOn.setVisible(false);
+        }*/
     }
 
     @FXML
@@ -54,6 +73,7 @@ public class SharingController implements Initializable {
             lblOn.setVisible(false);
             ON.setVisible(false);
             btnOn.setVisible(false);
+            admin.setWifi(Boolean.FALSE);
         } catch (InterruptedException e1) {
             e1.printStackTrace();
         }
@@ -72,6 +92,7 @@ public class SharingController implements Initializable {
             lblOff.setVisible(false);
             OFF.setVisible(false);
             btnOff.setVisible(false);
+            admin.setWifi(Boolean.TRUE);
         } catch (InterruptedException e1) {
             e1.printStackTrace();
         }

@@ -16,6 +16,7 @@ import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
+import model.Admin;
 
 /**
  *
@@ -27,6 +28,7 @@ public class GuestBookServer extends Application {
     ClassStage string = new ClassStage();
     CreateDB c = new CreateDB();
     ChangePass p = new ChangePass();
+    Admin admin = new Admin();
 
     @Override
     public void start(Stage stage) throws Exception {
@@ -35,6 +37,8 @@ public class GuestBookServer extends Application {
         ///Maximize
         c.create();
         p.change();
+        admin.setWifi(Boolean.FALSE);
+        System.out.println(admin.getWifi());
         Rectangle2D screenBounds = Screen.getPrimary().getVisualBounds();
         Scene scene = new Scene(root, screenBounds.getWidth(), screenBounds.getHeight());
         Image image = new Image(string.URL_IMAGE);

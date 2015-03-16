@@ -20,6 +20,7 @@
             <AnchorPane layoutX="26.0" layoutY="32.0" prefHeight="158.0" prefWidth="416.0" styleClass="paneList" />
             <FontAwesomeIcon glyphName="WINDOWS" layoutX="50.0" layoutY="150.0" size="120" />
             <FontAwesomeIcon glyphName="MOBILE_PHONE" layoutX="350.0" layoutY="162.0" size="150" wrappingWidth="64.28571319580078" />
+            <ToggleButton layoutX="62.0" layoutY="214.0" mnemonicParsing="false" text="ToggleButton" />
          </children></AnchorPane>
       <Text layoutX="14.0" layoutY="36.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Pengaturan Koneksi Data">
          <font>
