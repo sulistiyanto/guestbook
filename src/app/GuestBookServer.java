@@ -22,6 +22,7 @@ import javafx.stage.Stage;
  * @author sulistiyanto
  */
 public class GuestBookServer extends Application {
+    private static Object NetworkInterrface;
 
     ClassStage string = new ClassStage();
     CreateDB c = new CreateDB();
@@ -50,5 +51,4 @@ public class GuestBookServer extends Application {
     public static void main(String[] args) {
         launch(args);
     }
-
 }

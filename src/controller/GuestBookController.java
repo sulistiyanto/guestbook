@@ -101,6 +101,7 @@ public class GuestBookController extends ClassStage implements Initializable {
     @FXML
     private void actionUsername(ActionEvent event) {
         txtPassword.requestFocus();
+
     }
 
     @FXML
@@ -185,9 +186,11 @@ public class GuestBookController extends ClassStage implements Initializable {
             for (Enumeration en = NetworkInterface.getNetworkInterfaces(); en.hasMoreElements();) {
                 NetworkInterface intf = (NetworkInterface) en.nextElement();
                 for (Enumeration enumIpAddr = intf.getInetAddresses(); enumIpAddr.hasMoreElements();) {
+
                     InetAddress inetAddress = (InetAddress) enumIpAddr.nextElement();
                     if (!inetAddress.isLoopbackAddress() && inetAddress instanceof Inet4Address) {
                         ipAddress1 = inetAddress.getHostAddress();
+
                     }
                 }
             }
@@ -196,4 +199,5 @@ public class GuestBookController extends ClassStage implements Initializable {
         }
 
     }
+
 }

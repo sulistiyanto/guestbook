@@ -5,12 +5,7 @@
  */
 package controller;
 
-import configure.configIPWifi;
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.FileWriter;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -34,8 +29,6 @@ public class SharingController implements Initializable {
     private Label lblOn, ON;
     @FXML
     private Label lblOff, OFF;
-
-    configIPWifi ipWifi = new configIPWifi();
 
     /**
      * Initializes the controller class.
