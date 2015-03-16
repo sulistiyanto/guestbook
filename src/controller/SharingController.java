@@ -49,13 +49,21 @@ public class SharingController implements Initializable {
     }
 
     @FXML
-    private void ActionOn(ActionEvent event) {
-        lblOff.setVisible(true);
-        OFF.setVisible(true);
-        btnOff.setVisible(true);
-        lblOn.setVisible(false);
-        ON.setVisible(false);
-        btnOn.setVisible(false);
+    private void ActionOn(ActionEvent event) throws IOException {
+
+        String fileName = "C:\\xampp\\htdocs\\guestbook\\stop.lnk";
+        try {
+            Process p = Runtime.getRuntime().exec("cmd /c start " + fileName);
+            p.waitFor();
+            lblOff.setVisible(true);
+            OFF.setVisible(true);
+            btnOff.setVisible(true);
+            lblOn.setVisible(false);
+            ON.setVisible(false);
+            btnOn.setVisible(false);
+        } catch (InterruptedException e1) {
+            e1.printStackTrace();
+        }
     }
 
     @FXML
@@ -63,7 +71,6 @@ public class SharingController implements Initializable {
 
         String fileName = "C:\\xampp\\htdocs\\guestbook\\start.lnk";
         try {
-            Runtime runtime = Runtime.getRuntime();
             Process p = Runtime.getRuntime().exec("cmd /c start " + fileName);
             p.waitFor();
             lblOn.setVisible(true);
@@ -73,10 +80,8 @@ public class SharingController implements Initializable {
             OFF.setVisible(false);
             btnOff.setVisible(false);
         } catch (InterruptedException e1) {
-            // TODO Auto-generated catch block
             e1.printStackTrace();
         }
-        //ipWifi.IP();
     }
 
 }
