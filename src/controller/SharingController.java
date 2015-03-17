@@ -5,6 +5,11 @@
  */
 package controller;
 
+import configure.ConfigWifi;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -13,14 +18,13 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import model.Admin;
 
 /**
  * FXML Controller class
  *
  * @author sulistiyanto
  */
-public class SharingController implements Initializable {
+public class SharingController extends GuestBookController implements Initializable {
 
     @FXML
     private Button btnOn;
@@ -30,8 +34,9 @@ public class SharingController implements Initializable {
     private Label lblOn, ON;
     @FXML
     private Label lblOff, OFF;
-    
-    Admin admin = new Admin();
+
+    String str;
+    ConfigWifi wifi = new ConfigWifi();
 
     /**
      * Initializes the controller class.
@@ -41,9 +46,9 @@ public class SharingController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
-        System.out.println(admin.getWifi());
-        /*if (admin.getWifi() == true) {
+        readStatus();
+        String s = str.trim();
+        if (s.equals("on")) {
             lblOn.setVisible(true);
             ON.setVisible(true);
             btnOn.setVisible(true);
@@ -57,7 +62,7 @@ public class SharingController implements Initializable {
             lblOn.setVisible(false);
             ON.setVisible(false);
             btnOn.setVisible(false);
-        }*/
+        }
     }
 
     @FXML
@@ -73,9 +78,9 @@ public class SharingController implements Initializable {
             lblOn.setVisible(false);
             ON.setVisible(false);
             btnOn.setVisible(false);
-            admin.setWifi(Boolean.FALSE);
+            str = "off";
+            wifi.saveStatus(str);
         } catch (InterruptedException e1) {
-            e1.printStackTrace();
         }
     }
 
@@ -92,10 +97,26 @@ public class SharingController implements Initializable {
             lblOff.setVisible(false);
             OFF.setVisible(false);
             btnOff.setVisible(false);
-            admin.setWifi(Boolean.TRUE);
+            str = "on";
+            wifi.saveStatus(str);
         } catch (InterruptedException e1) {
-            e1.printStackTrace();
         }
     }
 
+    public void readStatus() {
+        try (BufferedReader br = new BufferedReader(new FileReader("C:\\xampp\\htdocs\\guestbook\\report\\wifi.txt"))) {
+            StringBuilder sb = new StringBuilder();
+            String line = br.readLine();
+            while (line != null) {
+                sb.append(line);
+                sb.append(System.lineSeparator());
+                line = br.readLine();
+            }
+            str = sb.toString();
+            System.out.println(str);
+        } catch (Exception e) {
+
+        }
+    }
+    
 }

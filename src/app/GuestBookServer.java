@@ -6,29 +6,34 @@
 package app;
 
 import configure.ClassStage;
+import configure.ConfigWifi;
+import configure.configScene;
+import controller.SharingController;
 import implementSQL.ChangePass;
 import implementSQL.CreateDB;
 import javafx.application.Application;
+import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.image.Image;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
-import model.Admin;
+import javafx.stage.WindowEvent;
 
 /**
  *
  * @author sulistiyanto
  */
 public class GuestBookServer extends Application {
-    private static Object NetworkInterrface;
 
     ClassStage string = new ClassStage();
     CreateDB c = new CreateDB();
     ChangePass p = new ChangePass();
-    Admin admin = new Admin();
+    String str;
+    ConfigWifi wifi = new ConfigWifi();
 
     @Override
     public void start(Stage stage) throws Exception {
@@ -37,8 +42,13 @@ public class GuestBookServer extends Application {
         ///Maximize
         c.create();
         p.change();
-        admin.setWifi(Boolean.FALSE);
-        System.out.println(admin.getWifi());
+        stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+            @Override
+            public void handle(WindowEvent we) {
+                str = "off";
+                wifi.saveStatus(str);
+            }
+        });
         Rectangle2D screenBounds = Screen.getPrimary().getVisualBounds();
         Scene scene = new Scene(root, screenBounds.getWidth(), screenBounds.getHeight());
         Image image = new Image(string.URL_IMAGE);
@@ -46,7 +56,6 @@ public class GuestBookServer extends Application {
         stage.setTitle(string.URL_MAIN_TITLE);
         stage.setScene(scene);
         stage.show();
-
     }
 
     /**
