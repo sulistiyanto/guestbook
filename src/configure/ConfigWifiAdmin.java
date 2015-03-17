@@ -13,11 +13,23 @@ import java.io.IOException;
  *
  * @author sulistiyanto
  */
-public class ConfigWifi {
+public class ConfigWifiAdmin {
 
     public void saveStatus(String str) {
         try {
             File newTextFile = new File("C:\\xampp\\htdocs\\guestbook\\report\\wifi.txt");
+
+            FileWriter fw = new FileWriter(newTextFile);
+            fw.write(str);
+            fw.close();
+
+        } catch (IOException iox) {
+        }
+    }
+    
+     public void saveAdmin(String str) {
+        try {
+            File newTextFile = new File("C:\\xampp\\htdocs\\guestbook\\report\\admin.txt");
 
             FileWriter fw = new FileWriter(newTextFile);
             fw.write(str);

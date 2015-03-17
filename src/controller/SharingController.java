@@ -5,11 +5,9 @@
  */
 package controller;
 
-import configure.ConfigWifi;
+import configure.ConfigWifiAdmin;
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -36,7 +34,7 @@ public class SharingController extends GuestBookController implements Initializa
     private Label lblOff, OFF;
 
     String str;
-    ConfigWifi wifi = new ConfigWifi();
+    ConfigWifiAdmin wifi = new ConfigWifiAdmin();
 
     /**
      * Initializes the controller class.

@@ -6,11 +6,14 @@
 package app;
 
 import configure.ClassStage;
-import configure.ConfigWifi;
+import configure.ConfigWifiAdmin;
 import configure.configScene;
 import controller.SharingController;
 import implementSQL.ChangePass;
 import implementSQL.CreateDB;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.application.Application;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
@@ -33,7 +36,7 @@ public class GuestBookServer extends Application {
     CreateDB c = new CreateDB();
     ChangePass p = new ChangePass();
     String str;
-    ConfigWifi wifi = new ConfigWifi();
+    ConfigWifiAdmin wifi = new ConfigWifiAdmin();
 
     @Override
     public void start(Stage stage) throws Exception {
@@ -45,8 +48,15 @@ public class GuestBookServer extends Application {
         stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
             @Override
             public void handle(WindowEvent we) {
-                str = "off";
-                wifi.saveStatus(str);
+                try {
+                    String fileName = "C:\\xampp\\htdocs\\guestbook\\stop.lnk";
+                    Process p = Runtime.getRuntime().exec("cmd /c start " + fileName);
+                    p.waitFor();
+                    str = "off";
+                    wifi.saveStatus(str);
+                } catch (InterruptedException | IOException e1) {
+                    System.out.println(e1);
+                } 
             }
         });
         Rectangle2D screenBounds = Screen.getPrimary().getVisualBounds();

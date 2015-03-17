@@ -6,6 +6,7 @@
 package controller;
 
 import configure.ClassStage;
+import configure.ConfigWifiAdmin;
 import configure.PopUpMenu;
 import configure.SHA1Utility;
 import configure.configScene;
@@ -21,7 +22,6 @@ import java.sql.SQLException;
 import java.util.Enumeration;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
@@ -31,7 +31,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
-import javafx.stage.WindowEvent;
 import model.Admin;
 
 /**
@@ -45,7 +44,9 @@ public class GuestBookController extends ClassStage implements Initializable {
     Admin admin = new Admin();
     Stage primaryStage;
     PopUpMenu popUp = new PopUpMenu();
+    ConfigWifiAdmin ad = new ConfigWifiAdmin();
     String ipAddress1;
+    String user;
 
     @FXML
     private TextField txtUsername, txtPassword;
@@ -144,7 +145,6 @@ public class GuestBookController extends ClassStage implements Initializable {
         try {
             String user = txtUsername.getText();
             String pass = SHA1Utility.getSHA1(txtPassword.getText());
-            System.out.println(pass);
             String u = "", p = "", l = "Admin", l2 = "";
             con.connectionDB();
             con.rs = con.st.executeQuery("select * from login where login_name='" + user + "' and login_password='" + pass + "' ");
@@ -159,7 +159,6 @@ public class GuestBookController extends ClassStage implements Initializable {
                 l2 = con.rs.getString(1);
             }
             con.rs.close();
-            System.out.println(l2);
             if (l2.equals(l) && u.equals(user) && p.equals(pass)) {
                 btnBook.setVisible(true);
                 btnGuest.setVisible(true);
@@ -174,10 +173,11 @@ public class GuestBookController extends ClassStage implements Initializable {
                 ipAddress();
                 lblIPAddress.setText(ipAddress1);
                 lblAdmin.setText(admin.getUsername());
+                user = admin.getUsername();
+                ad.saveAdmin(user);
             } else {
                 configScene.createDialog(Alert.AlertType.INFORMATION, "Maaf username dan password tidak cocok");
             }
-
         } catch (NoSuchAlgorithmException | UnsupportedEncodingException | SQLException ex) {
             System.out.println(ex);
         }
@@ -192,7 +192,6 @@ public class GuestBookController extends ClassStage implements Initializable {
                     InetAddress inetAddress = (InetAddress) enumIpAddr.nextElement();
                     if (!inetAddress.isLoopbackAddress() && inetAddress instanceof Inet4Address) {
                         ipAddress1 = inetAddress.getHostAddress();
-
                     }
                 }
             }

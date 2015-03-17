@@ -8,7 +8,10 @@ package controller;
 import configure.PopUpMenu;
 import configure.SHA1Utility;
 import configure.configScene;
+import implementSQL.ConnectionDB;
 import interfaces.interAccount;
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.io.UnsupportedEncodingException;
 import java.net.URL;
 import java.security.NoSuchAlgorithmException;
@@ -84,6 +87,9 @@ public class AccountController extends interAccount implements Initializable {
     private Boolean statusSaveOrUpdate = false;
     private Integer statusAction, onKlik, onSelect;
     PopUpMenu popUp = new PopUpMenu();
+    String user;
+    GuestBookController gbc = new GuestBookController();
+    ConnectionDB con = new ConnectionDB();
 
     /**
      * Initializes the controller class.
@@ -141,14 +147,14 @@ public class AccountController extends interAccount implements Initializable {
     }
 
     @FXML
-    private void keySearch(KeyEvent event){
+    private void keySearch(KeyEvent event) {
         if (txtSearch.textProperty().get().isEmpty()) {
             refreshAccount(tableAccount, listAccount);
             clear();
         }
         search(tableAccount, listAccount, txtSearch);
     }
-    
+
     @FXML
     private void clickedTableAccount(MouseEvent event) {
         try {
@@ -204,19 +210,31 @@ public class AccountController extends interAccount implements Initializable {
                 Optional<ButtonType> result = alert.showAndWait();
                 if (result.get() == ButtonType.OK) {
                     try {
-                        labelLoadingStatus.setText("Hapus Data . . .");
-                        configScene.progressBarLoading(boxLoading, progressBarLoading);
-                        statusAction = 1;
-                        int row = getTableRow().getIndex();
-                        tableAccount.getSelectionModel().select(row);
-                        clickedTableAccount(null);
-                        deleteAccount(tblView);
-                        refreshAccount(tableAccount, listAccount);
-                        clear();
-                        statusAction = 0;
-                        onKlik = 0;
+                        readStatus();
+                        con.connectionDB();
+                        String u = "";
+                        String sql = "select login_name from login where login_name = '" + user + "'";
+                        con.rs = con.st.executeQuery(sql);
+                        while (con.rs.next()) {
+                            u = con.rs.getString(1);
+                        }
+                        if (user.equals(u)) {
+                            configScene.createDialog(Alert.AlertType.WARNING, "Maaf admin status aktif!");
+                        } else if (!user.equals(u)) {
+                            labelLoadingStatus.setText("Hapus Data . . .");
+                            configScene.progressBarLoading(boxLoading, progressBarLoading);
+                            statusAction = 1;
+                            int row = getTableRow().getIndex();
+                            tableAccount.getSelectionModel().select(row);
+                            clickedTableAccount(null);
+                            deleteAccount(tblView);
+                            refreshAccount(tableAccount, listAccount);
+                            clear();
+                            statusAction = 0;
+                            onKlik = 0;
+                        }
                     } catch (Exception e) {
-                        System.out.println(e);
+                        System.out.println(e.getMessage());
                     }
                 } else {
 
@@ -323,6 +341,20 @@ public class AccountController extends interAccount implements Initializable {
         } catch (NoSuchAlgorithmException | UnsupportedEncodingException e) {
             System.out.println(e);
         }
+    }
 
+    public void readStatus() {
+        try (BufferedReader br = new BufferedReader(new FileReader("C:\\xampp\\htdocs\\guestbook\\report\\admin.txt"))) {
+            StringBuilder sb = new StringBuilder();
+            String line = br.readLine();
+            while (line != null) {
+                sb.append(line);
+                sb.append(System.lineSeparator());
+                line = br.readLine();
+            }
+            user = sb.toString().trim();
+        } catch (Exception e) {
+
+        }
     }
 }

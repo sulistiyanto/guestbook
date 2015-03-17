@@ -9,6 +9,7 @@ import configure.AutoBookId;
 import configure.FormatDate;
 import configure.PopUpMenu;
 import configure.configScene;
+import implementSQL.ConnectionDB;
 import interfaces.interBook;
 import java.net.URL;
 import java.time.LocalDate;
@@ -42,6 +43,7 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.StageStyle;
 import javafx.util.Callback;
+import model.Admin;
 import model.Book;
 
 /**
@@ -55,6 +57,8 @@ public class BookController implements Initializable {
     FormatDate formatDate = new FormatDate();
     interBook book = new interBook();
     PopUpMenu popUp = new PopUpMenu();
+    Admin admin = new Admin();
+    
 
     private Boolean statusSaveOrUpdate = false;
     private Integer statusAction, onKlik, onSelect;
@@ -86,6 +90,7 @@ public class BookController implements Initializable {
         configScene.progressBarLoading(boxLoading, progressBarLoading);
         clear();
         book.refreshBook(tableBook, listBook);
+        System.out.println("koo" + admin.getUsername());
     }
 
     @FXML
@@ -204,6 +209,7 @@ public class BookController implements Initializable {
                         clear();
                         statusAction = 0;
                         onKlik = 0;
+
                     } catch (Exception e) {
                         System.out.println(e);
                     }
