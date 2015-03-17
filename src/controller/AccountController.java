@@ -8,7 +8,6 @@ package controller;
 import configure.PopUpMenu;
 import configure.SHA1Utility;
 import configure.configScene;
-import implementSQL.ConnectionDB;
 import interfaces.interAccount;
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -89,7 +88,7 @@ public class AccountController extends interAccount implements Initializable {
     PopUpMenu popUp = new PopUpMenu();
     String user;
     GuestBookController gbc = new GuestBookController();
-    ConnectionDB con = new ConnectionDB();
+    Login l = new Login();
 
     /**
      * Initializes the controller class.
@@ -205,39 +204,26 @@ public class AccountController extends interAccount implements Initializable {
         ButtonCell(final TableView tblView) {
             hb.setSpacing(4);
             cellButtonDelete.setOnAction((ActionEvent t) -> {
-                Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Yakin Ingin Dihapus ?");
-                alert.initStyle(StageStyle.UTILITY);;
-                Optional<ButtonType> result = alert.showAndWait();
-                if (result.get() == ButtonType.OK) {
-                    try {
-                        readStatus();
-                        con.connectionDB();
-                        String u = "";
-                        String sql = "select login_name from login where login_name = '" + user + "'";
-                        con.rs = con.st.executeQuery(sql);
-                        while (con.rs.next()) {
-                            u = con.rs.getString(1);
-                        }
-                        if (user.equals(u)) {
-                            configScene.createDialog(Alert.AlertType.WARNING, "Maaf admin status aktif!");
-                        } else if (!user.equals(u)) {
-                            labelLoadingStatus.setText("Hapus Data . . .");
-                            configScene.progressBarLoading(boxLoading, progressBarLoading);
-                            statusAction = 1;
-                            int row = getTableRow().getIndex();
-                            tableAccount.getSelectionModel().select(row);
-                            clickedTableAccount(null);
-                            deleteAccount(tblView);
-                            refreshAccount(tableAccount, listAccount);
-                            clear();
-                            statusAction = 0;
-                            onKlik = 0;
-                        }
-                    } catch (Exception e) {
-                        System.out.println(e.getMessage());
+                try {
+                    Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Yakin Ingin Dihapus ?");
+                    alert.initStyle(StageStyle.UTILITY);;
+                    Optional<ButtonType> result = alert.showAndWait();
+                    if (result.get() == ButtonType.OK) {
+                        labelLoadingStatus.setText("Hapus Data . . .");
+                        configScene.progressBarLoading(boxLoading, progressBarLoading);
+                        statusAction = 1;
+                        int row = getTableRow().getIndex();
+                        tableAccount.getSelectionModel().select(row);
+                        clickedTableAccount(null);
+                        deleteAccount(tblView);
+                        refreshAccount(tableAccount, listAccount);
+                        clear();
+                        statusAction = 0;
+                        onKlik = 0;
+                    } else {
                     }
-                } else {
 
+                } catch (Exception e) {
                 }
             });
 
@@ -253,7 +239,6 @@ public class AccountController extends interAccount implements Initializable {
                 } catch (Exception e) {
                     System.out.println(e);
                 }
-
             });
         }
 
@@ -340,21 +325,6 @@ public class AccountController extends interAccount implements Initializable {
             }
         } catch (NoSuchAlgorithmException | UnsupportedEncodingException e) {
             System.out.println(e);
-        }
-    }
-
-    public void readStatus() {
-        try (BufferedReader br = new BufferedReader(new FileReader("C:\\xampp\\htdocs\\guestbook\\report\\admin.txt"))) {
-            StringBuilder sb = new StringBuilder();
-            String line = br.readLine();
-            while (line != null) {
-                sb.append(line);
-                sb.append(System.lineSeparator());
-                line = br.readLine();
-            }
-            user = sb.toString().trim();
-        } catch (Exception e) {
-
         }
     }
 }

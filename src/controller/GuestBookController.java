@@ -173,8 +173,7 @@ public class GuestBookController extends ClassStage implements Initializable {
                 ipAddress();
                 lblIPAddress.setText(ipAddress1);
                 lblAdmin.setText(admin.getUsername());
-                user = admin.getUsername();
-                ad.saveAdmin(user);
+                
             } else {
                 configScene.createDialog(Alert.AlertType.INFORMATION, "Maaf username dan password tidak cocok");
             }
