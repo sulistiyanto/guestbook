@@ -6,6 +6,7 @@
 package controller;
 
 import configure.AutoGuestId;
+import configure.Export;
 import configure.PopUpMenu;
 import configure.configScene;
 import implementSQL.ConnectionDB;
@@ -19,6 +20,8 @@ import java.io.IOException;
 import java.net.URL;
 import java.nio.ByteBuffer;
 import java.nio.channels.FileChannel;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Optional;
 import java.util.ResourceBundle;
 import javafx.beans.property.SimpleBooleanProperty;
@@ -55,6 +58,14 @@ import javafx.util.Callback;
 import javax.imageio.ImageIO;
 import model.Book;
 import model.Guest;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.design.JRDesignQuery;
+import net.sf.jasperreports.engine.design.JasperDesign;
+import net.sf.jasperreports.engine.xml.JRXmlLoader;
+import net.sf.jasperreports.view.JasperViewer;
 
 /**
  * FXML Controller class
@@ -67,10 +78,15 @@ public class GuestController extends interGuest implements Initializable {
     interGuestSQL guest = new interGuestSQL();
     AutoGuestId autoId = new AutoGuestId();
     PopUpMenu popUp = new PopUpMenu();
+    Export export = new Export();
 
     private Boolean statusSaveOrUpdate = false;
     String imageString, imageString1, imageString2, folder, bookName;
     private Integer statusAction, onKlik, onSelect;
+    JasperReport jasperReport;
+    JasperDesign jasperDesign;
+    JasperPrint jasperPrint;
+    Map<String, Object> param = new HashMap<>();
 
     @FXML
     private HBox boxLoading;
@@ -102,6 +118,17 @@ public class GuestController extends interGuest implements Initializable {
     @FXML
     private TableColumn colGuestAction;
     private final ObservableList<Guest> listGuest = FXCollections.observableArrayList();
+    private Object comboPresence;
+
+    @FXML
+    private void actionPrint(ActionEvent event) {
+        try {
+            jasperRep();
+            JasperViewer.viewReport(jasperPrint, false);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
 
     @FXML
     private void actionMale(ActionEvent event) {
@@ -260,10 +287,15 @@ public class GuestController extends interGuest implements Initializable {
             System.out.println(e);
         }
     }
+
+    @FXML
+    private void actionExport(ActionEvent event) {
+        handleExport();
+    }
+
     /*
      * fungsi tambahan
      */
-
     //clear text
     private void clear() {
         txtGuestName.setText("");
@@ -328,7 +360,6 @@ public class GuestController extends interGuest implements Initializable {
     private void handle() {
         try {
             FileChooser fileChooser = new FileChooser();
-
             //Set extension filter
             FileChooser.ExtensionFilter extFilterJPG = new FileChooser.ExtensionFilter("JPG files (*.jpg)", "*.JPG");
             fileChooser.getExtensionFilters().addAll(extFilterJPG);
@@ -339,7 +370,6 @@ public class GuestController extends interGuest implements Initializable {
             String locationImage = file.getParent();
             String nameImage = file.getName();
             imageString = locationImage + File.separator + nameImage;
-            System.out.println(imageString);
 
             if (file != null) {
                 try {
@@ -452,6 +482,63 @@ public class GuestController extends interGuest implements Initializable {
                 arg0.consume();
             }
         };
+    }
+
+    //export data
+    @SuppressWarnings("null")
+    private void handleExport() {
+        try {
+            jasperRep();
+            FileChooser fileChooser = new FileChooser();
+            //Set extension filter
+            FileChooser.ExtensionFilter extFilterDocx = new FileChooser.ExtensionFilter("Word Document (*.docx)", "*.docx");
+            FileChooser.ExtensionFilter extFilterXlsx = new FileChooser.ExtensionFilter("Excel Worlkbook (*.xlsx)", "*.xlsx");
+            FileChooser.ExtensionFilter extFilterPdf = new FileChooser.ExtensionFilter("PDF (*.pdf)", "*.pdf");
+            FileChooser.ExtensionFilter extFilterHtml = new FileChooser.ExtensionFilter("HTML (*.html)", "*.html");
+            fileChooser.getExtensionFilters().addAll(extFilterDocx, extFilterXlsx, extFilterPdf, extFilterHtml);
+            Stage stage = new Stage();
+            stage.initStyle(StageStyle.UTILITY);
+            //Show open file dialog
+            File file = fileChooser.showSaveDialog(stage);
+            String locationImage = file.getParent();
+            String nameImage = file.getName();
+            String reportName = locationImage + File.separator + nameImage;
+            String tempPath = file.getCanonicalPath().toLowerCase();
+            if (file != null) {
+                if (file.exists()) {
+                    export.chooseExtention(tempPath, reportName, jasperPrint);
+                } else if (!file.exists()) {
+                    export.chooseExtention(tempPath, reportName, jasperPrint);
+                }
+            } else {
+                System.out.println("Batal Pilih . . .");
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+
+    private void jasperRep() {
+        try {
+            String g = comboBookName.getValue();
+            System.out.println(g);
+            File file1 = new File("C:\\xampp\\htdocs\\guestbook\\report\\Guest.jrxml");
+            jasperDesign = JRXmlLoader.load(file1);
+            String sql = "SELECT guestbookserver.guest.guest_id, guestbookserver.guest.guest_name, "
+                    + "guestbookserver.guest.guest_sex,  guestbookserver.guest.guest_job, "
+                    + "guestbookserver.guest.guest_phone, guestbookserver.guest.guest_address, guestbookserver.book.book_id, "
+                    + "guestbookserver.book.book_name, guestbookserver.book.book_date "
+                    + "FROM guestbookserver.guest, guestbookserver.book "
+                    + "WHERE guestbookserver.guest.book_id=guestbookserver.book.book_id "
+                    + "AND guestbookserver.book.book_name = '" + g + "'";
+            JRDesignQuery newDesignQuery = new JRDesignQuery();
+            newDesignQuery.setText(sql);
+            jasperDesign.setQuery(newDesignQuery);
+            param.clear();
+            jasperReport = JasperCompileManager.compileReport(jasperDesign);
+            jasperPrint = JasperFillManager.fillReport(jasperReport, param, connectionDB.connectionDB());
+        } catch (Exception e) {
+        }
     }
 
     /**
