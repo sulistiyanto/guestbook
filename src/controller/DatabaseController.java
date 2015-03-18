@@ -129,7 +129,13 @@ public class DatabaseController implements Initializable {
 
             if (file != null) {
                 try {
-                    txtExport.setText(file.getParent() + File.separator + file.getName());
+                    if (file.exists()) {
+                        txtExport.setText(file.getParent() + File.separator + file.getName());
+                    } else if (!file.exists()) {
+                        txtExport.setText(file.getParent() + File.separator + file.getName());
+                    } else {
+
+                    }
                 } catch (Exception ex) {
                     System.out.println(ex);
                 }

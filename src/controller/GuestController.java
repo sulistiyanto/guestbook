@@ -509,6 +509,8 @@ public class GuestController extends interGuest implements Initializable {
                     export.chooseExtention(tempPath, reportName, jasperPrint);
                 } else if (!file.exists()) {
                     export.chooseExtention(tempPath, reportName, jasperPrint);
+                } else {
+                    
                 }
             } else {
                 System.out.println("Batal Pilih . . .");
