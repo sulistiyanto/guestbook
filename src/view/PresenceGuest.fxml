@@ -30,7 +30,7 @@
          <font>
             <Font size="14.0" />
          </font></Label>
-      <Separator layoutX="14.0" layoutY="486.0" prefHeight="3.0" prefWidth="549.0" />
+      <Separator layoutX="14.0" layoutY="490.0" prefHeight="3.0" prefWidth="549.0" />
       <TableView fx:id="tableGuest" layoutX="14.0" layoutY="99.0" prefHeight="351.0" prefWidth="549.0">
         <columns>
           <TableColumn fx:id="colGuestId" prefWidth="84.0">
@@ -80,7 +80,7 @@
             </TableColumn>
         </columns>
       </TableView>
-      <Button layoutX="14.0" layoutY="458.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="91.0" text="Cetak">
+      <Button layoutX="14.0" layoutY="458.0" mnemonicParsing="false" onAction="#actionPrint" prefHeight="25.0" prefWidth="91.0" text="Cetak">
          <graphic>
             <FontAwesomeIcon fill="WHITE" glyphName="PRINT" size="17px" />
          </graphic></Button>
@@ -88,5 +88,10 @@
          <graphic>
             <FontAwesomeIcon glyphName="SEARCH" size="15px" />
          </graphic></Label>
+      <Button layoutX="119.0" layoutY="458.0" mnemonicParsing="false" onAction="#actionExport" prefHeight="25.0" prefWidth="91.0" text="Export">
+         <graphic>
+            <FontAwesomeIcon fill="WHITE" glyphName="SHARE_ALT" size="17" />
+         </graphic>
+      </Button>
    </children>
 </AnchorPane>

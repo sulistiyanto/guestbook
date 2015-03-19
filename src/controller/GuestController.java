@@ -523,7 +523,6 @@ public class GuestController extends interGuest implements Initializable {
     private void jasperRep() {
         try {
             String g = comboBookName.getValue();
-            System.out.println(g);
             File file1 = new File("C:\\xampp\\htdocs\\guestbook\\report\\Guest.jrxml");
             jasperDesign = JRXmlLoader.load(file1);
             String sql = "SELECT guestbookserver.guest.guest_id, guestbookserver.guest.guest_name, "
