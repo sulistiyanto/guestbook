@@ -100,4 +100,104 @@ public class interGuestSQL extends ConnectionDB {
             closed();
         }
     }
+    
+    //total guest Yes
+    public void totalGuestYes(ComboBox comboBox, Label label) {
+        int count = 0;
+        String bookId = "";
+        try {
+            connectionDB();
+            String sqlBookName = "select book_id from book where book_name='" + comboBox.getValue() + "'";
+            rs = st.executeQuery(sqlBookName);
+            while (rs.next()) {
+                bookId = rs.getString("book_id");
+            }
+            String sql = ("select count(*) as guest_id from guest where guest_presence='Ya' and book_id='" + bookId + "'");
+            rs = st.executeQuery(sql);
+            while (rs.next()) {
+                count = rs.getInt("guest_id");
+                label.setText("" + count);
+            }
+            rs.close();
+        } catch (Exception e) {
+            System.out.println(e);
+        } finally {
+            closed();
+        }
+    }
+    
+    public void totalSearchGuestYes(ComboBox comboBox, Label label, TextField txtSearch) {
+        int count = 0;
+        String bookId = "";
+        try {
+            connectionDB();
+            String sqlBookName = "select book_id from book where book_name='" + comboBox.getValue() + "'";
+            rs = st.executeQuery(sqlBookName);
+            while (rs.next()) {
+                bookId = rs.getString("book_id");
+            }
+            String sql = ("select count(*) as guest_id from guest where guest_presence='Ya' and guest_name like  '" + txtSearch.getText()
+                    + "%' and book_id like '%" + bookId + "%'");
+            rs = st.executeQuery(sql);
+            while (rs.next()) {
+                count = rs.getInt("guest_id");
+                label.setText("" + count);
+            }
+            rs.close();
+        } catch (Exception e) {
+            System.out.println(e);
+        } finally {
+            closed();
+        }
+    }
+    
+    //total guest No
+    public void totalGuestNo(ComboBox comboBox, Label label) {
+        int count = 0;
+        String bookId = "";
+        try {
+            connectionDB();
+            String sqlBookName = "select book_id from book where book_name='" + comboBox.getValue() + "'";
+            rs = st.executeQuery(sqlBookName);
+            while (rs.next()) {
+                bookId = rs.getString("book_id");
+            }
+            String sql = ("select count(*) as guest_id from guest where guest_presence='Tidak' and book_id='" + bookId + "'");
+            rs = st.executeQuery(sql);
+            while (rs.next()) {
+                count = rs.getInt("guest_id");
+                label.setText("" + count);
+            }
+            rs.close();
+        } catch (Exception e) {
+            System.out.println(e);
+        } finally {
+            closed();
+        }
+    }
+    
+     public void totalSearchGuestNo(ComboBox comboBox, Label label, TextField txtSearch) {
+        int count = 0;
+        String bookId = "";
+        try {
+            connectionDB();
+            String sqlBookName = "select book_id from book where book_name='" + comboBox.getValue() + "'";
+            rs = st.executeQuery(sqlBookName);
+            while (rs.next()) {
+                bookId = rs.getString("book_id");
+            }
+            String sql = ("select count(*) as guest_id from guest where guest_presence='Tidak' and guest_name like  '" + txtSearch.getText()
+                    + "%' and book_id like '%" + bookId + "%'");
+            rs = st.executeQuery(sql);
+            while (rs.next()) {
+                count = rs.getInt("guest_id");
+                label.setText("" + count);
+            }
+            rs.close();
+        } catch (Exception e) {
+            System.out.println(e);
+        } finally {
+            closed();
+        }
+    }
 }

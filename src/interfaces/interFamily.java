@@ -59,7 +59,6 @@ public class interFamily extends implementFamily {
                 familySex = "P";
             }
             family.setFamilySex(familySex);
-            family.setFamilyPresence("Tidak");
             family.setGuestId(txtGuestId.getText());
             insertFamily(family);
         } catch (Exception e) {

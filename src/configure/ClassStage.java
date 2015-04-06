@@ -25,7 +25,7 @@ public class ClassStage {
     public final String URL_MAIN_FXML = "/view/GuestBook.fxml";
     public final String URL_GUEST_FXML = "/view/GuestFamilyMenu.fxml";
     public final String URL_BOOK_FXML = "/view/Book.fxml";
-    public final String URL_PRESENCE_FXML = "/view/PresenceMenu.fxml";
+    public final String URL_PRESENCE_FXML = "/view/PresenceGuest.fxml";
     public final String URL_ACCOUNT_FXML = "/view/Account.fxml";
     public final String URL_SETTING_FXML = "/view/SettingMenu.fxml";
 
@@ -33,7 +33,7 @@ public class ClassStage {
     public final String URL_GUEST_TITLE = "Daftar Tamu dan Keluarga";
     public final String URL_BOOK_TITLE = "Buku Tamu";
     public final String URL_ACCOUNT_TITLE = "Tentang";
-    public final String URL_PRESENCE_TITLE = "Kehadiran";
+    public final String URL_PRESENCE_TITLE = "Kehadiran Tamu";
     public final String URL_SETTING_TITLE = "Pengaturan";
 
     public final String URL_IMAGE = "/image/ic_launcher.png";

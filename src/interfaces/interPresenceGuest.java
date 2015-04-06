@@ -31,4 +31,15 @@ public class interPresenceGuest extends implementGuest{
         listGuest = listGuest(bookName);
         tableGuest.setItems(listGuest);
     }
+    
+    public void refreshGuestYes(TableView tableGuest, ObservableList listGuest, String bookName) {
+        listGuest = listGuestYes(bookName);
+        tableGuest.setItems(listGuest);
+    }
+    
+    public void refreshGuestNo(TableView tableGuest, ObservableList listGuest, String bookName) {
+        listGuest = listGuestNo(bookName);
+        tableGuest.setItems(listGuest);
+    }
+    
 }

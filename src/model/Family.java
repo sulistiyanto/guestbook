@@ -9,7 +9,6 @@ public class Family implements java.io.Serializable {
     private String familyId;
     private String familyName;
     private String familySex;
-    private String familyPresence;
     private String guestId;
     private String guestName;
     private String bookId;
@@ -17,11 +16,10 @@ public class Family implements java.io.Serializable {
     public Family() {
     }
 
-    public Family(String familyId, String familyName, String familySex, String familyPresence) {
+    public Family(String familyId, String familyName, String familySex) {
         this.familyId = familyId;
         this.familyName = familyName;
         this.familySex = familySex;
-        this.familyPresence = familyPresence;
     }
 
     public String getFamilyId() {
@@ -47,15 +45,7 @@ public class Family implements java.io.Serializable {
     public void setFamilySex(String familySex) {
         this.familySex = familySex;
     }
-
-    public String getFamilyPresence() {
-        return this.familyPresence;
-    }
-
-    public void setFamilyPresence(String familyPresence) {
-        this.familyPresence = familyPresence;
-    }
-
+    
     public String getGuestId() {
         return guestId;
     }

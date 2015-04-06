@@ -5,6 +5,7 @@
  */
 package controller;
 
+import static awjr.awjr5.awjr1242.ie;
 import configure.AutoGuestId;
 import configure.Export;
 import configure.PopUpMenu;
@@ -13,13 +14,16 @@ import implementSQL.ConnectionDB;
 import interfaces.interGuest;
 import interfaces.sql.interGuestSQL;
 import java.awt.image.BufferedImage;
+import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.URL;
 import java.nio.ByteBuffer;
 import java.nio.channels.FileChannel;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
@@ -62,8 +66,11 @@ import net.sf.jasperreports.engine.JasperCompileManager;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
+import net.sf.jasperreports.engine.data.JRMapCollectionDataSource;
 import net.sf.jasperreports.engine.design.JRDesignQuery;
 import net.sf.jasperreports.engine.design.JasperDesign;
+import net.sf.jasperreports.engine.util.JRLoader;
 import net.sf.jasperreports.engine.xml.JRXmlLoader;
 import net.sf.jasperreports.view.JasperViewer;
 
@@ -510,7 +517,7 @@ public class GuestController extends interGuest implements Initializable {
                 } else if (!file.exists()) {
                     export.chooseExtention(tempPath, reportName, jasperPrint);
                 } else {
-                    
+
                 }
             } else {
                 System.out.println("Batal Pilih . . .");
@@ -523,8 +530,8 @@ public class GuestController extends interGuest implements Initializable {
     private void jasperRep() {
         try {
             String g = comboBookName.getValue();
-            File file1 = new File("C:\\xampp\\htdocs\\guestbook\\report\\Guest.jrxml");
-            jasperDesign = JRXmlLoader.load(file1);
+            File file = new File("C:\\xampp\\htdocs\\guestbook\\report\\Guest.jasper");
+            jasperDesign = JRXmlLoader.load(file);
             String sql = "SELECT guestbookserver.guest.guest_id, guestbookserver.guest.guest_name, "
                     + "guestbookserver.guest.guest_sex,  guestbookserver.guest.guest_job, "
                     + "guestbookserver.guest.guest_phone, guestbookserver.guest.guest_address, guestbookserver.book.book_id, "
@@ -532,12 +539,14 @@ public class GuestController extends interGuest implements Initializable {
                     + "FROM guestbookserver.guest, guestbookserver.book "
                     + "WHERE guestbookserver.guest.book_id=guestbookserver.book.book_id "
                     + "AND guestbookserver.book.book_name = '" + g + "'";
+            InputStream jasper1 = getClass().getResourceAsStream("C:/xampp/htdocs/guestbook/report/Guest.jasper");
+            
             JRDesignQuery newDesignQuery = new JRDesignQuery();
             newDesignQuery.setText(sql);
             jasperDesign.setQuery(newDesignQuery);
             param.clear();
             jasperReport = JasperCompileManager.compileReport(jasperDesign);
-            jasperPrint = JasperFillManager.fillReport(jasperReport, param, connectionDB.connectionDB());
+            jasperPrint = JasperFillManager.fillReport(jasper1, param, connectionDB.connectionDB());
         } catch (Exception e) {
         }
     }

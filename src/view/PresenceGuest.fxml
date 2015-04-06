@@ -20,8 +20,8 @@
          </font>
       </Text>
       <Separator layoutX="12.0" layoutY="42.0" prefHeight="3.0" prefWidth="549.0" />
-      <TextField fx:id="txtSearch" layoutX="14.0" layoutY="59.0" onKeyReleased="#keySearch" prefHeight="25.0" prefWidth="366.0" promptText="Pencarian nama tamu" styleClass="custom-text-field" />
-      <ComboBox fx:id="comboBookName" layoutX="393.0" layoutY="59.0" prefHeight="25.0" prefWidth="169.0" />
+      <TextField fx:id="txtSearch" layoutX="14.0" layoutY="59.0" onKeyReleased="#keySearch" prefHeight="25.0" prefWidth="235.0" promptText="Pencarian nama tamu" styleClass="custom-text-field" />
+      <ComboBox fx:id="comboBookName" layoutX="422.0" layoutY="59.0" prefHeight="25.0" prefWidth="140.0" />
       <Label fx:id="lblTotal" layoutX="528.0" layoutY="461.0" text="Label">
          <font>
             <Font name="System Bold" size="14.0" />
@@ -84,7 +84,7 @@
          <graphic>
             <FontAwesomeIcon fill="WHITE" glyphName="PRINT" size="17px" />
          </graphic></Button>
-      <Label layoutX="357.0" layoutY="60.0" prefHeight="20.0" prefWidth="22.0">
+      <Label layoutX="225.0" layoutY="60.0" prefHeight="20.0" prefWidth="22.0">
          <graphic>
             <FontAwesomeIcon glyphName="SEARCH" size="15px" />
          </graphic></Label>
@@ -93,5 +93,8 @@
             <FontAwesomeIcon fill="WHITE" glyphName="SHARE_ALT" size="17" />
          </graphic>
       </Button>
+      <RadioButton fx:id="rdAll" layoutX="258.0" layoutY="63.0" mnemonicParsing="false" onAction="#actionAll" text="Semua" />
+      <RadioButton fx:id="rdYes" layoutX="322.0" layoutY="63.0" mnemonicParsing="false" onAction="#actionYes" text="Ya" />
+      <RadioButton fx:id="rdNo" layoutX="364.0" layoutY="63.0" mnemonicParsing="false" onAction="#actionNo" text="Tidak" />
    </children>
 </AnchorPane>

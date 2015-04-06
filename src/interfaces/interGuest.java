@@ -131,7 +131,26 @@ public class interGuest extends implementGuest{
         } catch (Exception e) {
             System.out.println(e);
         }
-
+    }
+    
+    //search
+    public void searchYes(TableView tableGuset, ObservableList listGuest, TextField txtSearch, ComboBox bookName) {
+        try {
+            listGuest = searchGuestYes(txtSearch, bookName);
+            tableGuset.setItems(listGuest);
+        } catch (Exception e) {
+            System.out.println(e);
+        }
     }
 
+    //search
+    public void searchNo(TableView tableGuset, ObservableList listGuest, TextField txtSearch, ComboBox bookName) {
+        try {
+            listGuest = searchGuestNo(txtSearch, bookName);
+            tableGuset.setItems(listGuest);
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+    
 }

@@ -85,6 +85,64 @@ public class implementGuest extends ConnectionDB {
         }
     }
 
+    //list table Yes
+    public ObservableList<Guest> listGuestYes(String bookName) {
+        try {
+            connectionDB();
+            ObservableList<Guest> list = FXCollections.observableArrayList();
+            rs = st.executeQuery("select * from guest, book "
+                    + "where book.book_id = guest.book_id and guest.guest_presence = 'Ya' and book.book_name= '" + bookName + "' "
+                    + "order by guest_name asc");
+            while (rs.next()) {
+                Guest guest = new Guest();
+                guest.setGuestId(rs.getString(1));
+                guest.setGuestName(rs.getString(2));
+                guest.setGuestSex(rs.getString(3));
+                guest.setGuestJob(rs.getString(4));
+                guest.setGuestPhone(rs.getString(5));
+                guest.setGuestAddress(rs.getString(6));
+                guest.setGuestPresence(rs.getString(8));
+                guest.setBookId(rs.getString(9));
+                list.add(guest);
+            }
+            return list;
+        } catch (Exception e) {
+            System.out.println("list" + e);
+            return null;
+        } finally {
+            closed();
+        }
+    }
+    
+    //list table No
+    public ObservableList<Guest> listGuestNo(String bookName) {
+        try {
+            connectionDB();
+            ObservableList<Guest> list = FXCollections.observableArrayList();
+            rs = st.executeQuery("select * from guest, book "
+                    + "where book.book_id = guest.book_id and guest.guest_presence = 'Tidak' and book.book_name= '" + bookName + "' "
+                    + "order by guest_name asc");
+            while (rs.next()) {
+                Guest guest = new Guest();
+                guest.setGuestId(rs.getString(1));
+                guest.setGuestName(rs.getString(2));
+                guest.setGuestSex(rs.getString(3));
+                guest.setGuestJob(rs.getString(4));
+                guest.setGuestPhone(rs.getString(5));
+                guest.setGuestAddress(rs.getString(6));
+                guest.setGuestPresence(rs.getString(8));
+                guest.setBookId(rs.getString(9));
+                list.add(guest);
+            }
+            return list;
+        } catch (Exception e) {
+            System.out.println("list" + e);
+            return null;
+        } finally {
+            closed();
+        }
+    }
+    
     //Delete
     public void deleteGuest(String guestId) {
         try {
@@ -121,6 +179,64 @@ public class implementGuest extends ConnectionDB {
             ObservableList<Guest> listSearch = FXCollections.observableArrayList();
             String sql = "select * from guest, book where book.book_id = guest.book_id and "
                     + "guest.guest_name like '" + txtGuestName.getText() + "%' and book.book_name like '" + bookName.getValue() + "%' order by guest_name asc";
+            rs = st.executeQuery(sql);
+            while (rs.next()) {
+                Guest guest = new Guest();
+                guest.setGuestId(rs.getString(1));
+                guest.setGuestName(rs.getString(2));
+                guest.setGuestSex(rs.getString(3));
+                guest.setGuestJob(rs.getString(4));
+                guest.setGuestPhone(rs.getString(5));
+                guest.setGuestAddress(rs.getString(6));
+                guest.setGuestPresence(rs.getString(8));
+                guest.setBookId(rs.getString(9));
+                listSearch.add(guest);
+            }
+            return listSearch;
+        } catch (Exception e) {
+            System.out.println("list" + e);
+            return null;
+        } finally {
+            closed();
+        }
+    }
+    
+    //list search table Yes
+    public ObservableList<Guest> searchGuestYes(TextField txtGuestName, ComboBox bookName) {
+        try {
+            connectionDB();
+            ObservableList<Guest> listSearch = FXCollections.observableArrayList();
+            String sql = "select * from guest, book where book.book_id = guest.book_id and "
+                    + "guest.guest_presence= 'Ya' and guest.guest_name like '" + txtGuestName.getText() + "%' and book.book_name like '" + bookName.getValue() + "%' order by guest_name asc";
+            rs = st.executeQuery(sql);
+            while (rs.next()) {
+                Guest guest = new Guest();
+                guest.setGuestId(rs.getString(1));
+                guest.setGuestName(rs.getString(2));
+                guest.setGuestSex(rs.getString(3));
+                guest.setGuestJob(rs.getString(4));
+                guest.setGuestPhone(rs.getString(5));
+                guest.setGuestAddress(rs.getString(6));
+                guest.setGuestPresence(rs.getString(8));
+                guest.setBookId(rs.getString(9));
+                listSearch.add(guest);
+            }
+            return listSearch;
+        } catch (Exception e) {
+            System.out.println("list" + e);
+            return null;
+        } finally {
+            closed();
+        }
+    }
+    
+    //list search table Yes
+    public ObservableList<Guest> searchGuestNo(TextField txtGuestName, ComboBox bookName) {
+        try {
+            connectionDB();
+            ObservableList<Guest> listSearch = FXCollections.observableArrayList();
+            String sql = "select * from guest, book where book.book_id = guest.book_id and "
+                    + "guest.guest_presence='Tidak' and guest.guest_name like '" + txtGuestName.getText() + "%' and book.book_name like '" + bookName.getValue() + "%' order by guest_name asc";
             rs = st.executeQuery(sql);
             while (rs.next()) {
                 Guest guest = new Guest();

@@ -46,7 +46,7 @@ public class implementFamily extends ConnectionDB {
         try {
             connectionDB();
             String sql = "insert into family values ('" + family.getFamilyId() + "', '" + family.getFamilyName()
-                    + "', '" + family.getFamilySex() + "', '" + family.getFamilyPresence() + "', '" + family.getGuestId() + "')";
+                    + "', '" + family.getFamilySex() + "', '" + family.getGuestId() + "')";
             st.executeUpdate(sql);
             closed();
         } catch (Exception e) {
@@ -62,7 +62,7 @@ public class implementFamily extends ConnectionDB {
             connectionDB();
             ObservableList<Family> list = FXCollections.observableArrayList();
             rs = st.executeQuery("select f.family_id, f.family_name, f.family_sex, "
-                    + "f.family_presence, g.guest_name, g.guest_id, b.book_id from family f, guest g, "
+                    + "g.guest_name, g.guest_id, b.book_id from family f, guest g, "
                     + "book b where f.guest_id=g.guest_id and g.book_id=b.book_id and "
                     + "b.book_name ='" + comboBookName.getValue() + "' order by g.guest_name asc");
             while (rs.next()) {
@@ -70,10 +70,9 @@ public class implementFamily extends ConnectionDB {
                 family.setFamilyId(rs.getString(1));
                 family.setFamilyName(rs.getString(2));
                 family.setFamilySex(rs.getString(3));
-                family.setFamilyPresence(rs.getString(4));
-                family.setGuestName(rs.getString(5));
-                family.setGuestId(rs.getString(6));
-                family.setBookId(rs.getString(7));
+                family.setGuestName(rs.getString(4));
+                family.setGuestId(rs.getString(5));
+                family.setBookId(rs.getString(6));
                 list.add(family);
             }
             return list;
@@ -117,7 +116,7 @@ public class implementFamily extends ConnectionDB {
             connectionDB();
             ObservableList<Family> listSearch = FXCollections.observableArrayList();
             String sql = "select f.family_id, f.family_name, f.family_sex, "
-                    + "f.family_presence, g.guest_name, g.guest_id, b.book_id from family f, guest g, "
+                    + "g.guest_name, g.guest_id, b.book_id from family f, guest g, "
                     + "book b where f.guest_id=g.guest_id and g.book_id=b.book_id and "
                     + "g.guest_name like '%" + txtGuestName.getText() + "%' "
                     + "and b.book_name ='" + bookName.getValue() + "'order by guest_name asc";
@@ -127,10 +126,9 @@ public class implementFamily extends ConnectionDB {
                 family.setFamilyId(rs.getString(1));
                 family.setFamilyName(rs.getString(2));
                 family.setFamilySex(rs.getString(3));
-                family.setFamilyPresence(rs.getString(4));
-                family.setGuestName(rs.getString(5));
-                family.setGuestId(rs.getString(6));
-                family.setBookId(rs.getString(7));
+                family.setGuestName(rs.getString(4));
+                family.setGuestId(rs.getString(5));
+                family.setBookId(rs.getString(6));
                 listSearch.add(family);
             }
             return listSearch;

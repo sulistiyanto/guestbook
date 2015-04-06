@@ -23,6 +23,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.RadioButton;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -61,6 +62,8 @@ public class PresenceGuestController extends interPresenceGuest implements Initi
     @FXML
     private TextField txtSearch;
     @FXML
+    private RadioButton rdAll, rdYes, rdNo;
+    @FXML
     private ComboBox<String> comboBookName;
     @FXML
     private Label lblTotal;
@@ -80,14 +83,51 @@ public class PresenceGuestController extends interPresenceGuest implements Initi
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         combo();
+        rdAll.setSelected(true);
         bookName = (String) comboBookName.getValue();
         listTableresenceGuest(colGuestId, colGuestName, colGuestSex, colGuestPhone, colGuestPresence);
         refreshGuest(tableGuest, listGuest, bookName);
+        guest.totalGuest(comboBookName, lblTotal);
         comboBookName.getSelectionModel().selectedItemProperty().addListener((ObservableValue<? extends String> observable, String oldValue, String newValue) -> {
             listTableresenceGuest(colGuestId, colGuestName, colGuestSex, colGuestPhone, colGuestPresence);
             refreshGuest(tableGuest, listGuest, newValue);
             guest.totalGuest(comboBookName, lblTotal);
+            all();
         });
+    }
+
+    private void all() {
+        rdAll.setSelected(true);
+        rdYes.setSelected(false);
+        rdNo.setSelected(false);
+        bookName = (String) comboBookName.getValue();
+        refreshGuest(tableGuest, listGuest, bookName);
+        guest.totalGuest(comboBookName, lblTotal);
+    }
+
+    @FXML
+    private void actionAll(ActionEvent event) {
+        all();
+    }
+
+    @FXML
+    private void actionYes(ActionEvent event) {
+        rdAll.setSelected(false);
+        rdYes.setSelected(true);
+        rdNo.setSelected(false);
+        bookName = (String) comboBookName.getValue();
+        refreshGuestYes(tableGuest, listGuest, bookName);
+        guest.totalGuestYes(comboBookName, lblTotal);
+    }
+
+    @FXML
+    private void actionNo(ActionEvent event) {
+        rdAll.setSelected(false);
+        rdYes.setSelected(false);
+        rdNo.setSelected(true);
+        bookName = (String) comboBookName.getValue();
+        refreshGuestNo(tableGuest, listGuest, bookName);
+        guest.totalGuestNo(comboBookName, lblTotal);
     }
 
     @FXML
@@ -107,12 +147,29 @@ public class PresenceGuestController extends interPresenceGuest implements Initi
 
     @FXML
     private void keySearch(KeyEvent event) {
-        if (txtSearch.textProperty().get().isEmpty()) {
-            listTableresenceGuest(colGuestId, colGuestName, colGuestSex, colGuestPhone, colGuestPresence);
-            guest.totalGuest(comboBookName, lblTotal);
+        if (rdAll.isSelected()) {
+            if (txtSearch.getText().isEmpty()) {
+                listTableresenceGuest(colGuestId, colGuestName, colGuestSex, colGuestPhone, colGuestPresence);
+                guest.totalGuest(comboBookName, lblTotal);
+            }
+            g.search(tableGuest, listGuest, txtSearch, comboBookName);
+            guest.totalSearchGuest(comboBookName, lblTotal, txtSearch);
+        } else if (rdYes.isSelected()) {
+            if (txtSearch.getText().isEmpty()) {
+                listTableresenceGuest(colGuestId, colGuestName, colGuestSex, colGuestPhone, colGuestPresence);
+                guest.totalGuest(comboBookName, lblTotal);
+            }
+            g.searchYes(tableGuest, listGuest, txtSearch, comboBookName);
+            guest.totalSearchGuestYes(comboBookName, lblTotal, txtSearch);
+        } else if (rdNo.isSelected()) {
+            if (txtSearch.getText().isEmpty()) {
+                listTableresenceGuest(colGuestId, colGuestName, colGuestSex, colGuestPhone, colGuestPresence);
+                guest.totalGuest(comboBookName, lblTotal);
+            }
+            g.searchNo(tableGuest, listGuest, txtSearch, comboBookName);
+            guest.totalSearchGuestNo(comboBookName, lblTotal, txtSearch);
         }
-        g.search(tableGuest, listGuest, txtSearch, comboBookName);
-        guest.totalSearchGuest(comboBookName, lblTotal, txtSearch);
+
     }
 
     private void combo() {
